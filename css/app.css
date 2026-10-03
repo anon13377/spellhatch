@@ -1,0 +1,153 @@
+/* Spell Hatch design tokens and shared components. Owned by W0.
+   Mode cards add styles only in css/modes/<id>.css using these tokens. */
+
+@font-face { font-family: "Nunito"; src: url("../assets/fonts/nunito-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Nunito"; src: url("../assets/fonts/nunito-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Nunito"; src: url("../assets/fonts/nunito-900.woff2") format("woff2"); font-weight: 900; font-display: swap; }
+@font-face { font-family: "OpenDyslexic"; src: url("../assets/fonts/OpenDyslexic-Regular.woff") format("woff"); font-display: swap; }
+
+:root {
+  /* color */
+  --bg: #fff8ec;
+  --surface: #ffffff;
+  --surface-2: #fff1d6;
+  --ink: #2b2240;
+  --ink-soft: #6b6280;
+  --line: #eadfc8;
+  --primary: #7c4dff;       /* purple: main buttons */
+  --primary-ink: #ffffff;
+  --primary-soft: #ece4ff;
+  --accent: #ffb020;        /* yellow: coins, stars */
+  --good: #22a861;          /* green: correct, grow */
+  --good-soft: #dff6e9;
+  --bad: #e5484d;           /* red: wrong */
+  --bad-soft: #fde4e4;
+  --info: #2f80ed;          /* blue: hatch */
+  --info-soft: #e3efff;
+  --shadow: 0 4px 0 rgba(43, 34, 64, 0.12);
+  --shadow-lift: 0 8px 20px rgba(43, 34, 64, 0.14);
+
+  /* type */
+  --font: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-word: var(--font);          /* swapped for OpenDyslexic by .dyslexia */
+  --fs-xs: 0.875rem;
+  --fs-sm: 1rem;
+  --fs-md: 1.25rem;
+  --fs-lg: 1.75rem;
+  --fs-xl: 2.5rem;
+  --fs-word: clamp(2rem, 9vw, 3.5rem);
+
+  /* space and shape */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
+  --r-sm: 10px; --r-md: 16px; --r-lg: 24px; --r-pill: 999px;
+  --tap: 56px;              /* minimum touch target */
+  --gutter: 16px;
+  --maxw: 720px;
+  --speed: 160ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1b1729; --surface: #262038; --surface-2: #30294a; --ink: #f4efff; --ink-soft: #b8afd0;
+    --line: #3d3558; --primary: #9b7bff; --primary-soft: #362c5c; --good-soft: #1d3a2c; --bad-soft: #4a2228;
+    --info-soft: #1f2e4a; --shadow: 0 4px 0 rgba(0, 0, 0, 0.35); --shadow-lift: 0 8px 20px rgba(0, 0, 0, 0.4);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1b1729; --surface: #262038; --surface-2: #30294a; --ink: #f4efff; --ink-soft: #b8afd0;
+  --line: #3d3558; --primary: #9b7bff; --primary-soft: #362c5c; --good-soft: #1d3a2c; --bad-soft: #4a2228;
+  --info-soft: #1f2e4a; --shadow: 0 4px 0 rgba(0, 0, 0, 0.35); --shadow-lift: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.dyslexia { --font-word: "OpenDyslexic", var(--font); }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100dvh; background: var(--bg); color: var(--ink);
+  font-family: var(--font); font-weight: 500; font-size: var(--fs-sm); line-height: 1.4;
+  -webkit-tap-highlight-color: transparent; overflow-x: hidden;
+}
+button { font: inherit; color: inherit; }
+img, svg { max-width: 100%; }
+
+/* layout */
+.screen { max-width: var(--maxw); margin: 0 auto; padding: var(--s4) var(--gutter) var(--s7); }
+.center { text-align: center; }
+.row { display: flex; gap: var(--s3); align-items: center; flex-wrap: wrap; }
+.stack { display: flex; flex-direction: column; gap: var(--s3); }
+.grid { display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+.spacer { flex: 1; }
+
+/* type */
+.title { font-size: var(--fs-xl); font-weight: 900; margin: var(--s4) 0 var(--s2); }
+.subtitle { font-size: var(--fs-lg); font-weight: 900; margin: var(--s3) 0; }
+.muted { color: var(--ink-soft); }
+.word { font-family: var(--font-word); font-size: var(--fs-word); font-weight: 900; letter-spacing: 0.04em; }
+
+/* big button */
+.btn {
+  min-height: var(--tap); min-width: var(--tap); padding: 0 var(--s5);
+  border: 0; border-radius: var(--r-md); background: var(--surface); color: var(--ink);
+  font-weight: 900; font-size: var(--fs-md); box-shadow: var(--shadow); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s2);
+  transition: transform var(--speed), box-shadow var(--speed); touch-action: manipulation; user-select: none;
+}
+.btn:active { transform: translateY(3px); box-shadow: none; }
+.btn:focus-visible, .tile:focus-visible, .card:focus-visible { outline: 3px solid var(--info); outline-offset: 2px; }
+.btn-primary { background: var(--primary); color: var(--primary-ink); }
+.btn-good { background: var(--good); color: #fff; }
+.btn-ghost { background: transparent; box-shadow: none; }
+.btn-block { width: 100%; }
+.btn[disabled] { opacity: 0.45; pointer-events: none; }
+
+/* round speaker button */
+.speaker {
+  width: 72px; height: 72px; border-radius: 50%; border: 0; background: var(--primary); color: #fff;
+  box-shadow: var(--shadow); font-size: 2rem; cursor: pointer; display: inline-grid; place-items: center;
+}
+.speaker:active { transform: translateY(3px); box-shadow: none; }
+
+/* letter tile */
+.tile {
+  min-width: var(--tap); height: var(--tap); padding: 0 var(--s2); border-radius: var(--r-sm);
+  border: 2px solid var(--line); background: var(--surface); box-shadow: var(--shadow);
+  font-family: var(--font-word); font-size: var(--fs-lg); font-weight: 900; display: inline-grid; place-items: center;
+  cursor: pointer; user-select: none; touch-action: manipulation;
+}
+.tile.slot { background: var(--surface-2); box-shadow: none; border-style: dashed; cursor: default; }
+.tile.filled { border-style: solid; }
+.tile.good { background: var(--good-soft); border-color: var(--good); }
+.tile.bad { background: var(--bad-soft); border-color: var(--bad); }
+.tile.fixed { background: transparent; border-color: transparent; box-shadow: none; cursor: default; }
+
+/* card */
+.card { background: var(--surface); border-radius: var(--r-lg); padding: var(--s4); box-shadow: var(--shadow); }
+
+/* progress ring: set --p from 0 to 1 */
+.ring {
+  --p: 0; --size: 64px; width: var(--size); height: var(--size); border-radius: 50%;
+  background: conic-gradient(var(--good) calc(var(--p) * 360deg), var(--line) 0);
+  display: inline-grid; place-items: center; font-weight: 900;
+}
+.ring > span { width: calc(var(--size) - 14px); height: calc(var(--size) - 14px); border-radius: 50%; background: var(--surface); display: grid; place-items: center; }
+
+/* hatch and grow bar */
+.eggbar { display: flex; height: 14px; border-radius: var(--r-pill); overflow: hidden; background: var(--line); }
+.eggbar > .hatch { background: var(--info); }
+.eggbar > .grow { background: var(--good); }
+
+/* pills for coins and xp */
+.pill { display: inline-flex; align-items: center; gap: var(--s1); padding: var(--s1) var(--s3); border-radius: var(--r-pill); background: var(--surface); box-shadow: var(--shadow); font-weight: 900; }
+
+/* feedback animations shared by modes */
+@keyframes sh-shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+@keyframes sh-pop { 0% { transform: scale(0.8); } 60% { transform: scale(1.12); } 100% { transform: scale(1); } }
+.shake { animation: sh-shake 320ms; }
+.pop { animation: sh-pop 260ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+}
+
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

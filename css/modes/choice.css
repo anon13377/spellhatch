@@ -1,0 +1,33 @@
+/* Styles for the choice mode. Owned by W1-E. Prefix every class with .choice- */
+.choice-root { display: flex; flex-direction: column; gap: var(--s4); align-items: stretch; }
+.choice-top { display: flex; flex-direction: column; align-items: center; gap: var(--s3); text-align: center; }
+.choice-speaker { width: 96px; height: 96px; font-size: 3rem; }
+.choice-pic { width: 96px; height: 96px; }
+.choice-def { font-size: var(--fs-md); font-weight: 700; margin: 0; max-width: 28ch; }
+.choice-prompt { margin: 0; font-size: var(--fs-md); font-weight: 900; color: var(--ink-soft); }
+.choice-options { display: grid; grid-template-columns: 1fr; gap: var(--s3); }
+@media (min-width: 440px) { .choice-options { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.choice-option {
+  min-height: 72px; padding: var(--s2) var(--s3); border: 3px solid var(--line); border-radius: var(--r-lg);
+  background: var(--surface); color: var(--ink); box-shadow: var(--shadow); cursor: pointer;
+  font-family: var(--font-word); font-weight: 900; font-size: clamp(1.4rem, 6.5vw, 2rem); letter-spacing: 0.03em;
+  overflow-wrap: anywhere; line-height: 1.15; touch-action: manipulation; user-select: none;
+  transition: transform var(--speed), background var(--speed), border-color var(--speed);
+}
+.choice-option:active:not(:disabled) { transform: translateY(3px); box-shadow: none; }
+.choice-option:focus-visible { outline: 3px solid var(--info); outline-offset: 2px; }
+.choice-option:disabled { cursor: default; }
+.choice-wrong { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); opacity: 0.7; text-decoration: line-through; }
+.choice-removed { opacity: 0.35; border-style: dashed; text-decoration: line-through; }
+.choice-right { background: var(--good-soft); border-color: var(--good); color: var(--good); opacity: 1; }
+.choice-bar { display: flex; justify-content: center; }
+.choice-hint { background: var(--primary-soft); color: var(--primary); }
+.choice-cheer { margin: 0; min-height: 1.6em; text-align: center; font-size: var(--fs-lg); font-weight: 900; color: var(--good); }
+@media (max-height: 780px) {
+  .choice-root { gap: var(--s2); }
+  .choice-top { gap: var(--s2); }
+  .choice-speaker, .choice-pic { width: 72px; height: 72px; font-size: 2.2rem; }
+  .choice-option { min-height: 60px; }
+  .choice-options { gap: var(--s2); }
+  .choice-cheer { min-height: 1.2em; }
+}

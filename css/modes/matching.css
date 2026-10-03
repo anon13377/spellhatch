@@ -1,0 +1,43 @@
+/* Styles for the matching mode. Owned by W1-E. Prefix every class with .matching- */
+.matching-root { display: flex; flex-direction: column; gap: var(--s4); align-items: stretch; }
+.matching-prompt { margin: 0; text-align: center; font-size: var(--fs-md); font-weight: 900; color: var(--ink-soft); }
+.matching-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); }
+.matching-col { display: flex; flex-direction: column; gap: var(--s3); }
+.matching-card {
+  min-height: 72px; padding: var(--s2); border: 3px solid var(--line); border-radius: var(--r-md);
+  background: var(--surface); color: var(--ink); box-shadow: var(--shadow); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  touch-action: manipulation; user-select: none;
+  transition: transform var(--speed), background var(--speed), border-color var(--speed);
+}
+.matching-card:active:not(:disabled) { transform: translateY(3px); box-shadow: none; }
+.matching-card:focus-visible { outline: 3px solid var(--info); outline-offset: 2px; }
+.matching-word {
+  font-family: var(--font-word); font-weight: 900; font-size: clamp(1.3rem, 6vw, 1.9rem);
+  overflow-wrap: anywhere; line-height: 1.1;
+}
+.matching-pic img { width: 68px; height: 68px; pointer-events: none; }
+.matching-selected { background: var(--primary-soft); border-color: var(--primary); transform: scale(1.04); }
+.matching-wrong { background: var(--bad-soft); border-color: var(--bad); }
+.matching-flash { border-color: var(--accent); background: #fff3cf; animation: matching-blink 400ms ease-in-out 4; }
+@keyframes matching-blink { 50% { transform: scale(1.08); } }
+.matching-card:disabled, .matching-locked { cursor: default; }
+.matching-locked, .matching-locked:disabled { background: var(--good-soft); border-color: var(--good); color: var(--good); opacity: 1; box-shadow: none; }
+.matching-top { display: flex; flex-direction: column; align-items: center; gap: var(--s3); }
+.matching-speaker { width: 96px; height: 96px; font-size: 3rem; }
+.matching-clue { min-height: 0; text-align: center; }
+.matching-cluepic { width: 72px; height: 72px; }
+.matching-def { margin: 0; font-size: var(--fs-md); font-weight: 700; }
+.matching-wordgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); }
+.matching-hear .matching-word { min-height: 80px; font-size: clamp(1.3rem, 6vw, 1.9rem); }
+.matching-bar { display: flex; justify-content: center; }
+.matching-hint { background: var(--primary-soft); color: var(--primary); }
+.matching-cheer { margin: 0; min-height: 1.6em; text-align: center; font-size: var(--fs-lg); font-weight: 900; color: var(--good); }
+@media (max-height: 760px) {
+  .matching-root { gap: var(--s2); }
+  .matching-col { gap: var(--s2); }
+  .matching-card { min-height: 60px; padding: var(--s1); }
+  .matching-pic img { width: 52px; height: 52px; }
+  .matching-hear .matching-word { min-height: 64px; }
+  .matching-speaker { width: 72px; height: 72px; font-size: 2.2rem; }
+}

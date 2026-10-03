@@ -1,0 +1,34 @@
+/* Styles for the build mode. Owned by W1-D. Prefix every class with .build- */
+
+.build-root { display: flex; flex-direction: column; align-items: center; gap: var(--s4); width: 100%; }
+.build-clue { display: flex; flex-direction: column; align-items: center; gap: var(--s3); min-height: 88px; justify-content: center; }
+.build-speaker { width: 88px; height: 88px; }
+.build-pic { width: 96px; height: 96px; object-fit: contain; }
+.build-def { margin: 0; max-width: 28ch; text-align: center; font-size: var(--fs-md); font-weight: 700; }
+
+.build-slots { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2); width: 100%; min-height: 60px; }
+.build-slots .build-slot { min-width: 0; width: clamp(56px, 11vw, 60px); height: clamp(56px, 14vw, 64px); padding: 0; position: relative; overflow: hidden; }
+.build-slots .build-slot.fixed { width: clamp(16px, 5vw, 26px); font-size: clamp(1.4rem, 6vw, 2rem); color: var(--ink-soft); overflow: visible; }
+.build-slots .build-slot.slot { border-color: var(--primary); }
+.build-slots .build-slot.filled { border-style: solid; border-color: var(--good); background: var(--good-soft); }
+.build-celebrate .build-slot.filled { background: var(--good); }
+.build-celebrate .build-slot .build-tile { color: #fff; }
+
+.build-tray { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s3); width: 100%; padding: var(--s3); border-radius: var(--r-lg); background: var(--surface-2); }
+.build-cell { width: clamp(56px, 15vw, 68px); height: clamp(56px, 16vw, 72px); border-radius: var(--r-sm); }
+.build-cell.build-empty { border: 2px dashed var(--line); }
+.build-tray .build-tile { width: 100%; height: 100%; min-width: 0; padding: 0; font-size: clamp(1.6rem, 7vw, 2.25rem); text-transform: lowercase; background: var(--surface); }
+.build-tray .build-tile.bad { background: var(--bad-soft); border-color: var(--bad); }
+
+/* a tile that sits inside a slot fills it and drops its own frame */
+.build-slots .build-tile { position: absolute; inset: 0; width: 100%; height: 100%; min-width: 0; padding: 0; border: 0; border-radius: 0; box-shadow: none; background: transparent; font-size: clamp(1.4rem, 6vw, 2rem); text-transform: lowercase; }
+.build-slots .build-tile.build-hinted { background: var(--info-soft); }
+
+.build-actions { display: flex; justify-content: center; }
+.build-hint { gap: var(--s3); background: var(--accent); color: #3a2a00; }
+.build-cost { background: var(--surface); color: var(--ink); box-shadow: none; padding: 0 var(--s3); min-height: 32px; font-size: var(--fs-sm); }
+.build-cost::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 2px solid #c98600; margin-right: var(--s1); }
+
+@media (min-width: 700px) { .build-root { gap: var(--s5); } }
+
+.build-poor { opacity: 0.45; }

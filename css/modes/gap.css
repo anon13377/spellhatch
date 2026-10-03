@@ -1,0 +1,25 @@
+/* Styles for the gap mode. Owned by W1-E. Prefix every class with .gap- */
+.gap-root { display: flex; flex-direction: column; gap: var(--s4); align-items: center; }
+.gap-top { display: flex; flex-direction: column; align-items: center; gap: var(--s3); text-align: center; }
+.gap-speaker { width: 96px; height: 96px; font-size: 3rem; }
+.gap-pic { width: 96px; height: 96px; }
+.gap-def { font-size: var(--fs-md); font-weight: 700; margin: 0; max-width: 28ch; }
+.gap-word { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2); max-width: 100%; }
+.gap-cell {
+  width: clamp(34px, 11vw, 56px); height: clamp(46px, 14vw, 68px); border-radius: var(--r-sm);
+  display: inline-grid; place-items: center; font-family: var(--font-word); font-weight: 900;
+  font-size: clamp(1.6rem, 7.5vw, 2.6rem); line-height: 1;
+}
+.gap-fixed { background: var(--surface); border: 2px solid var(--line); box-shadow: var(--shadow); }
+.gap-blank { background: var(--surface-2); border: 3px dashed var(--ink-soft); }
+.gap-next { border-color: var(--primary); background: var(--primary-soft); animation: gap-pulse 1.2s ease-in-out infinite; }
+.gap-done { background: var(--info-soft); border: 3px solid var(--info); color: var(--info); }
+.gap-all-good { background: var(--good-soft); border: 3px solid var(--good); color: var(--good); }
+@keyframes gap-pulse { 50% { transform: scale(1.06); } }
+.gap-prompt { margin: 0; font-size: var(--fs-md); font-weight: 900; color: var(--ink-soft); text-align: center; }
+.gap-tray { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s3); }
+.gap-tile { min-width: 64px; height: 64px; font-size: var(--fs-xl); border-width: 3px; }
+.gap-tile:active:not(:disabled) { transform: translateY(3px); box-shadow: none; }
+.gap-used { opacity: 0.2; box-shadow: none; cursor: default; }
+.gap-hint { background: var(--primary-soft); color: var(--primary); }
+.gap-cheer { margin: 0; min-height: 1.6em; text-align: center; font-size: var(--fs-lg); font-weight: 900; color: var(--good); }
